@@ -2,8 +2,6 @@ import random
 import tkinter.font
 from tkinter import *
 
-
-
 def create_random_playground(size):
     #random numbers
     random_numbers = random.sample(range(0, size*size), size*size)
@@ -27,14 +25,17 @@ def print_field(field,size):
 
     X_index=0
     Y_index=0
-    print()
+    Start_index=20;
+    End_index=120;
+    center_Value=((End_index-Start_index)/2)+20;
+
     for i in range(0,size):
-        Y_index+=100
         for j in range(0,size):
-            c.create_rectangle(20+X_index, 20+Y_index, 120+X_index, 120+Y_index,outline="black", fill="white", width=2)
-            c.create_text(70+X_index, 70+Y_index, text=field[i][j], font=tkinter.font.Font(size=25,family='Helvetica'))
+            c.create_rectangle(Start_index+X_index, Start_index+Y_index, End_index+X_index, End_index+Y_index,outline="black", fill="white", width=2)
+            c.create_text(center_Value+X_index, center_Value+Y_index, text=field[i][j], font=tkinter.font.Font(size=25,family='Helvetica'))
             X_index+=100
         X_index = 0;
+        Y_index += 100
 
     c.pack()
     top.mainloop()

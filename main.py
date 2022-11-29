@@ -9,7 +9,7 @@ def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-create_random_playground(3)
+create_random_playground(4)
 
 
 # Press the green button in the gutter to run the script.
