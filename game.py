@@ -15,6 +15,12 @@ def create_random_playground(size):
 
     print(field)
     print_field(field,size)
+    #test pre vyriesenie hry
+    print(if_game_solved(field, size))
+
+    #osetrenie ak by sa vytvorilo uz vyriesene pole
+    if if_game_solved(field, size) == True:
+        create_random_playground(size)
 
 def print_field(field,size):
 
@@ -39,3 +45,17 @@ def print_field(field,size):
 
     c.pack()
     top.mainloop()
+
+def if_game_solved(field, size):
+
+    state = False
+
+    control_index = 0
+
+    for i in range(0,size):
+        for j in range(0,size):
+            if field[i][j] != control_index:
+                return state
+            control_index = control_index + 1
+    state = True
+    return state
