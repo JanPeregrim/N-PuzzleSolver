@@ -10,7 +10,7 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 #vytvorenie plochy
-create_random_playground(3)
+create_random_playground(4)
 
 
 # Press the green button in the gutter to run the script.

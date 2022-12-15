@@ -3,8 +3,11 @@ import tkinter.font
 from tkinter import *
 
 def create_random_playground(size):
-    #random numbers
     random_numbers = random.sample(range(0, size*size), size*size)
+
+    #### Field for testing ######
+    #field = [[1, 2, 3, 4,] ,[5, 6, 7, 8] , [13, 9, 12, 15] , [0, 11, 10, 14]]
+
     field = []
     numbers = []
     for i in random_numbers:
@@ -13,13 +16,16 @@ def create_random_playground(size):
             field.append(numbers)
             numbers = []
 
+
     print(field)
-    print_field(field,size)
     #test pre vyriesenie hry
-    print(if_game_solved(field, size))
+    print(solved_game(field, size))
+    print_field(field,size)
+    print_status(field,size)
+
 
     #osetrenie ak by sa vytvorilo uz vyriesene pole
-    if if_game_solved(field, size) == True:
+    if solved_game(field, size) == True:
         create_random_playground(size)
 
 def print_field(field,size):
@@ -46,7 +52,7 @@ def print_field(field,size):
     c.pack()
     top.mainloop()
 
-def if_game_solved(field, size):
+def solved_game(field, size):
 
     state = False
 
@@ -59,3 +65,54 @@ def if_game_solved(field, size):
             control_index = control_index + 1
     state = True
     return state
+
+def getInvCount(field,size):
+    arr1 = []
+    for y in field:
+        for x in y:
+            arr1.append(x)
+
+    field = arr1
+    inv_count = 0
+    for i in range(size * size - 1):
+        for j in range(i + 1, size * size):
+            if (field[j] and field[i] and field[i] > field[j]):
+                inv_count += 1
+
+    return inv_count
+
+
+# find Position of blank from bottom
+def findXPosition(field,size):
+    # start from bottom-right corner of matrix
+    for i in range(size - 1, -1, -1):
+        for j in range(size - 1, -1, -1):
+            if (field[i][j] == 0):
+                return size - i
+
+
+# This function returns true if given
+# instance of N*N - 1 puzzle is solvable
+
+def isSolvable(field, size):
+    # Count inversions in given puzzle
+    invCount = getInvCount(field, size)
+    # If grid is odd, return true if inversion
+    # count is even.
+    if (size & 1):
+        return ~(invCount & 1)
+
+    else:  # grid is even
+        pos = findXPosition(field, size)
+        if (pos & 1):
+            return ~(invCount & 1)
+        else:
+            return invCount & 1
+
+def print_status(field,size):
+    if isSolvable(field,size):
+        print("Solvable")
+        return 1
+    else:
+        print("Not Solvable")
+        return 0
