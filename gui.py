@@ -21,27 +21,38 @@ def print_field(top, c, field,size):
         X_index = 0;
         Y_index += 100
 
-def show_buttons():
+def gen_buttons():
     #B = Button(top, text="DFS", command=DFS(root, size))
 
     button_generate_4 = Button(text="GENERATE RANDOM 4x4")
     button_generate_4.place(anchor="center", height=75, width=150, x=500, y=150)
-    button_generate_4.bind("<ButtonPress>", generate_random_puzzle(4))
+    if button_generate_4.bind("<ButtonPress>"):
+        size = 4
+        root = generate_random_puzzle(size)
+        alg_buttons(root, size)
 
     button_generate_3 = Button(text="GENERATE RANDOM 3x3")
     button_generate_3.place(anchor="center", height=75, width=150, x=500, y=250)
-    button_generate_3.bind("<ButtonPress>", generate_random_puzzle(3))
+    if button_generate_3.bind("<ButtonPress>"):
+        size = 3
+        # root = [1, 2, 3, 4, 5, 6, 7, 0, 8]
+        root = generate_random_puzzle(size)
+        alg_buttons(root, size)
 
+def alg_buttons(root,size):
 
     button_greedy = Button(text="greedy")
-    button_greedy = button_greedy.place(anchor="center", height=50, width=50, x=500, y=400)
-    # button_greedy.bind("<ButtonPress>")
+    button_greedy.place(anchor="center", height=50, width=50, x=500, y=400)
+    button_greedy.bind("<ButtonPress>",Greedy(root,size))
+    print("GREEEDY")
 
     button_A = Button(text="A*")
-    button_A = button_A.place(anchor="center", height=50, width=50, x=500, y=450)
+    button_A.place(anchor="center", height=50, width=50, x=500, y=450)
+    button_A.bind("<ButtonPress>",AStar_search(root,size))
 
     button_dfs = Button(text="DFS")
-    button_dfs = button_dfs.place(anchor="center", height=50, width=50, x=500, y=500)
+    button_dfs.place(anchor="center", height=50, width=50, x=500, y=500)
+    # button_dfs.bind("<ButtonPress>",DFS(root,size))
 
     button_forward = Button(text="-->")
     button_forward.place(anchor="center", height=50, width=50, x=350, y=550)
@@ -50,13 +61,12 @@ def show_buttons():
     button_forward.place(anchor="center", height=50, width=50, x=150, y=550)
 
 
-    # button_dfs.pack()
-    # button_A.pack()
-    # button_greedy.pack()
 def generate_random_puzzle(size):
     random_numbers = random.sample(range(0, size*size), size*size)
     print_field(top, c, random_numbers, size)
     print(random_numbers)
+    return random_numbers
+
 
 def print_empty_field():
 
@@ -86,7 +96,7 @@ if __name__ == "__main__":
     # n = 3
 
     print_empty_field()
-    show_buttons()
+    gen_buttons()
 
     c.pack()
     top.mainloop()
