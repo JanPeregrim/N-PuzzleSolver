@@ -2,11 +2,17 @@ import random
 import tkinter.font
 from tkinter import *
 
+import numpy as np
+
+from a_star import a_star
+from iddfs import iddfs
+
+
 def create_random_playground(size):
     random_numbers = random.sample(range(0, size*size), size*size)
 
     #### Field for testing ######
-    #field = [[1, 2, 3, 4,] ,[5, 6, 7, 8] , [13, 9, 12, 15] , [0, 11, 10, 14]]
+    # field = [[1, 2, 3, 4,] ,[5, 6, 7, 8] , [13, 9, 12, 15] , [0, 11, 10, 14]]
 
     field = []
     numbers = []
@@ -20,13 +26,16 @@ def create_random_playground(size):
     print(field)
     #test pre vyriesenie hry
     print(solved_game(field, size))
-    print_field(field,size)
-    print_status(field,size)
 
+    print_field(field,size)
 
     #osetrenie ak by sa vytvorilo uz vyriesene pole
     if solved_game(field, size) == True:
         create_random_playground(size)
+
+    try_algorithm(field,size);
+
+    return 0
 
 def print_field(field,size):
 
@@ -116,3 +125,23 @@ def print_status(field,size):
     else:
         print("Not Solvable")
         return 0
+
+def try_algorithm(field,size):
+    start_field = []
+    for i in  range(0,size):
+        for j in range(0,size):
+            start_field.append(field[i][j])
+    # start_field = x.tolist()
+    # start_field = x.tostring()
+    list_string = map(str, start_field)
+    start_field = list(list_string)
+
+    if print_status(field,size):
+        a_star(start_field, 'M')
+        a_star(start_field, 'D')
+        iddfs(start_field)
+
+    else:
+        create_random_playground(size)
+
+    return 0
