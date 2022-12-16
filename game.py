@@ -32,7 +32,6 @@ def create_random_playground(size):
     #osetrenie ak by sa vytvorilo uz vyriesene pole
     if solved_game(field, size) == True:
         create_random_playground(size)
-
     try_algorithm(field,size);
 
     return 0
@@ -131,8 +130,7 @@ def try_algorithm(field,size):
     for i in  range(0,size):
         for j in range(0,size):
             start_field.append(field[i][j])
-    # start_field = x.tolist()
-    # start_field = x.tostring()
+
     list_string = map(str, start_field)
     start_field = list(list_string)
 

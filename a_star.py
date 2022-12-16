@@ -90,12 +90,13 @@ def check_hm(b, parent, ph, pq, visited):
             heappush(pq, (h, b.board_as_string_list))
 
 
-def get_path(board, visited):
+def get_path(board, visited,moves):
 
     if board == 'NULL':
         return
     else:
-        get_path(visited[board][2], visited)
+        moves=moves+1
+        get_path(visited[board][2], visited,moves)
         b = Board(board.split(' '))
         b.print_board()
         print('')
@@ -104,6 +105,7 @@ def get_path(board, visited):
         else:
             heur = str(b.displaced_tiles_heuristic())
         print('Heuristic Value: ' + heur + '\n')
+        print('moves was:',moves)
 
 
 def a_star(start_board, heuristic):
@@ -115,6 +117,7 @@ def a_star(start_board, heuristic):
     pq = []
     visited = {}
     global HEURISTIC
+    moves=0
 
     HEURISTIC = heuristic
     b = Board(start_board)
@@ -145,7 +148,7 @@ def a_star(start_board, heuristic):
 
         # node[0] == 0 or (use for next project, put that or cond in if cond
         if node[1] == GOAL_STATE_15_AS_ILIST or node[1] == GOAL_STATE_15_AS_SLIST:
-            get_path(GOAL_STATE_15, visited)
+            get_path(GOAL_STATE_15, visited,moves)
 
             if HEURISTIC == 'M':
                 heur = 'Manhattan Heuristic'

@@ -28,6 +28,12 @@ class Board(object):
         """
         for row in self.current_board:
             print(row)
+    def update_board(self):
+        """
+        :return: simply prints the board
+        """
+        for row in self.current_board:
+            print(row)
 
     def manhattan_heuristic(self):
         """

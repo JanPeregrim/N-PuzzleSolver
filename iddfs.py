@@ -7,8 +7,10 @@ import os
 import time
 import psutil
 import globals
+
 from board import *
 from copy import deepcopy
+
 
 
 def move_board(direction, node, visited):
@@ -85,7 +87,7 @@ def check_hm(b, parent, visited):
     return False
 
 
-def get_path(board, visited):
+def get_path(board, visited,moves):
     """
     :param board:
     :param visited:
@@ -95,10 +97,12 @@ def get_path(board, visited):
     if board == 'NULL':
         return
     else:
-        get_path(visited[board], visited)
+        moves=moves+1
+        get_path(visited[board], visited,moves)
         b = Board(board.split(' '))
         b.print_board()
         print('')
+        print('moves was:',moves)
 
 
 def iddfs(start_board):
@@ -106,11 +110,10 @@ def iddfs(start_board):
     :param start_board:
     :return:
     """
-
+    moves=0
     visited = {}
     curr_time = time.time()
     depth = 0
-
     while True:
 
         if (time.time() - curr_time) * 1000 > 15000:
@@ -122,7 +125,7 @@ def iddfs(start_board):
         visited[' '.join(str(e) for e in cb_as_list)] = 'NULL'
 
         if dls(start_board, depth, visited):
-            get_path(GOAL_STATE_15, visited)
+            get_path(GOAL_STATE_15, visited,moves)
             print('*** Solution Found using IDDFS!                     ***')
             print('*** The Solution Path has been printed out for you. ***')
             return True
