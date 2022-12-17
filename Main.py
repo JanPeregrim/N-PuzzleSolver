@@ -5,27 +5,27 @@ from tkinter import *
 from gui import print_field
 
 #initial state
-size = 3
+n = 4
 # n=int(input("Enter n\n"))
-print("Enter your" ,size,"*",size, "puzzle")
+print("Enter your" ,n,"*",n, "puzzle")
 # root = []
 # for i in range(0,n*n):
 #     p = int(input())
 #     root.append(p)
 
 #test
-root=[1, 2, 3, 4, 5, 6, 7, 0, 8]
-
+#root=[1, 2, 3, 4, 5, 6, 7, 0, 8]
+root = [1, 2, 3, 4, 5, 6, 7 , 0, 8, 9, 10, 11, 12, 13, 14, 15] #test
 print("The given state is:", root)
 
 #test gui
-top = Tk()
-top.geometry("500x500")
-# creating a simple canvas.
-c = Canvas(top, bg="white", height="500", width=500)
-print_field(top,c, root, size)
-c.pack()
-top.mainloop()
+# top = Tk()
+# top.geometry("500x500")
+# # creating a simple canvas.
+# c = Canvas(top, bg="white", height="500", width=500)
+# print_field(top,c, root, size)
+# c.pack()
+# top.mainloop()
 
 #count the number of inversions       
 def inv_num(puzzle):
@@ -56,13 +56,13 @@ if solvable(root):
     DFS_time = time() - time2
     print('DFS Solution is ', DFS_solution[0])
     print('Number of explored nodes is ', DFS_solution[1])
-    print('DFS Time:', DFS_time, "\n")  
+    print('DFS Time:', DFS_time, "\n")
     
     time3 = time()
     Greedy_solution = Greedy(root, n)
     Greedy_time = time() - time3
     print('Greedy Solution is ', Greedy_solution[0])
-    print('Number of explored nodes is ', Greedy_solution[1])   
+    print('Number of explored nodes is ', Greedy_solution[1])
     print('Greedy Time:', Greedy_time , "\n")
     
     time4 = time()

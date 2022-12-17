@@ -1,6 +1,11 @@
 class State:
-    goal = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+    # meni sa vo funkcii change_attribute
+    goal = []
     #goal = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    #goal = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+
 
     #this should be changed manually based on n 
     #e.g. it should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] if n is 4.
@@ -20,8 +25,15 @@ class State:
         else:
             self.cost = cost
 
-            
-            
+    #funkcia na zmenu goal state
+    def change_attribute(size):
+
+        if size == 3:
+            State.goal = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        else:
+            State.goal = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+        print(State.goal ,size)
     def test(self): #check if the given state is goal
         if self.state == self.goal:
             return True
