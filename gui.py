@@ -1,5 +1,6 @@
 import random
 import tkinter.font
+from time import time
 from tkinter import *
 from Search_Algorithms import DFS,Greedy,AStar_search
 
@@ -21,7 +22,7 @@ def print_field(top, c, field,size):
         X_index = 0;
         Y_index += 100
 
-def gen_buttons():
+def gen_buttons(c):
     #B = Button(top, text="DFS", command=DFS(root, size))
 
     button_generate_4 = Button(text="GENERATE RANDOM 4x4")
@@ -33,22 +34,30 @@ def gen_buttons():
 
     button_generate_3 = Button(text="GENERATE RANDOM 3x3")
     button_generate_3.place(anchor="center", height=75, width=150, x=500, y=250)
-    if button_generate_3.bind("<ButtonPress>"):
+    if True:
+    # if button_generate_3.bind("<ButtonPress>"):
         size = 3
-        # root = [1, 2, 3, 4, 5, 6, 7, 0, 8]
-        root = generate_random_puzzle(size)
-        alg_buttons(root, size)
+        root = [1, 2, 3, 4, 5, 6, 7, 0, 8]
+        # root = generate_random_puzzle(size)
+        alg_buttons(root, size, c)
 
-def alg_buttons(root,size):
+def alg_buttons(root,size,c):
 
     button_greedy = Button(text="greedy")
     button_greedy.place(anchor="center", height=50, width=50, x=500, y=400)
     button_greedy.bind("<ButtonPress>",Greedy(root,size))
-    print("GREEEDY")
 
     button_A = Button(text="A*")
     button_A.place(anchor="center", height=50, width=50, x=500, y=450)
-    button_A.bind("<ButtonPress>",AStar_search(root,size))
+    # if button_A.bind("<ButtonPress>"):
+    if True: ##Len aby som videl vysledok ci funguje
+        time4 = time()
+        AStar_solution = AStar_search(root,size)
+        AStar_time = time() - time4
+        c.create_text(72,100,text="Node explored: ",font=tkinter.font.Font(size=12,family='Helvetica'))
+        c.create_text(145,100,text=AStar_solution[1],font=tkinter.font.Font(size=12,family='Helvetica'))
+        c.create_text(40,75,text="Time: ",font=tkinter.font.Font(size=12,family='Helvetica'))
+        c.create_text(150,75,text=AStar_time,font=tkinter.font.Font(size=12,family='Helvetica'))
 
     button_dfs = Button(text="DFS")
     button_dfs.place(anchor="center", height=50, width=50, x=500, y=500)
@@ -90,13 +99,16 @@ if __name__ == "__main__":
     top = Tk()
     top.title('N-Puzzle Solver')
     top.geometry("600x600")
+
     # creating a simple canvas.
     c = Canvas(top, bg="white", height="600", width="600")
+    c.create_text(300, 20, text="N - Puzzle Solver ", font=tkinter.font.Font(size=25, family='Helvetica'))
+
     root = [1, 2, 3, 4, 5, 6, 7, 0, 8]
     # n = 3
 
     print_empty_field()
-    gen_buttons()
+    gen_buttons(c)
 
     c.pack()
     top.mainloop()
