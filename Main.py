@@ -15,7 +15,8 @@ print("Enter your" ,n,"*",n, "puzzle")
 
 #test
 #root=[1, 2, 3, 4, 5, 6, 7, 0, 8]
-root = [1, 2, 3, 4, 5, 6, 7 , 0, 8, 9, 10, 11, 12, 13, 14, 15] #test
+# root = [13, 8, 9, 4, 7, 2, 15, 6, 14, 1, 11, 10, 3, 0, 5, 12] #test
+root = [1, 2, 3, 7, 4, 5, 10, 6, 8, 9, 0, 11, 12, 13, 14, 15]
 print("The given state is:", root)
 
 #test gui
@@ -40,7 +41,7 @@ def solvable(puzzle): #check if initial state puzzle is solvable: number of inve
     inv_counter = inv_num(puzzle)
     if (inv_counter %2 ==0):
         return True
-    return False
+    return False #ZAMENIL SOM
 
 
 #1,8,2,0,4,3,7,6,5 is solvable

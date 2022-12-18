@@ -7,11 +7,14 @@ from queue import LifoQueue
 #Depth-first Search with limited depth
 def DFS(given_state, n):
 
-    root = State(given_state, None, None, 0, 0)
-    if root.test():
-        return root.solution()
+    root2 = State(given_state, None, None, 0, 0)
+
+    State.change_attribute(n)
+
+    if root2.test():
+        return root2.solution()
     frontier = LifoQueue()
-    frontier.put(root)
+    frontier.put(root2)
     explored = []
     
     while not(frontier.empty()):
@@ -26,9 +29,9 @@ def DFS(given_state, n):
         for child in children:
             if child.state not in explored:
                 if child.test():
-                    return child.solution(), len(explored)
+                    return child.solution(), len(explored), 0
                 frontier.put(child)
-    return (("Couldn't find solution in the limited depth."), len(explored))
+    return (("Couldn't find solution in the limited depth."), len(explored), 1)
         
     
     
@@ -37,6 +40,9 @@ def Greedy(given_state , n):
     explored = []
     counter = 0
     root2 = State(given_state, None, None, 0, 0)
+
+    State.change_attribute(n)
+
     #root.evaluation()
     evaluation = root2.Manhattan_Distance(n) #we can use Misplaced_Tiles() instead.
     frontier.put((evaluation[0], counter, root2)) #based on greedy evaluation

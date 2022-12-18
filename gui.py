@@ -46,13 +46,39 @@ def solvable(puzzle): #check if initial state puzzle is solvable: number of inve
         return True
     return False
 
+#vytvoril som vlastnu funkciu pre kontrolu pretoze sa mi zdalo ze tamta nefungovala spravne https://stackoverflow.com/questions/34570344/check-if-15-puzzle-is-solvable
+def if_solvable(puzzle, n):
+    parity = 0
+    gridWidth = n
+    row = 0
+    blankRow = 0
+
+    for i in range(len(puzzle)):
+        if (i % gridWidth == 0):
+            row = row + 1
+        if (puzzle[i] == 0) :
+            blankRow = row
+            continue
+        for j in range(i+1 , len(puzzle)):
+            if ((puzzle[i] > puzzle[j]) and puzzle[j] != 0):
+                parity = parity + 1
+
+    if (gridWidth % 2 == 0):
+        if(blankRow % 2 == 0):
+            return parity % 2 != 0
+        else:
+            return parity % 2 == 0
+    else:
+        return parity % 2 == 0
 def field_4(event):
     global root
     global size
     size = 4
     root = generate_random_puzzle(size)
     print(solvable(root)) #kontrola do konzoly
-    while solvable(root) == False:
+    # while solvable(root) == False:
+    #     root = generate_random_puzzle(size)
+    while if_solvable(root, size) == False:
         root = generate_random_puzzle(size)
     print(solvable(root))  #kontrola do konzoly
     alg_buttons(root, size, c)
@@ -62,7 +88,9 @@ def field_3(event):
     size = 3
     root = generate_random_puzzle(size)
     print(solvable(root)) # kontrola do konzoly
-    while solvable(root) == False:
+    # while solvable(root) == False:
+    #     root = generate_random_puzzle(size)
+    while if_solvable(root, size) == False:
         root = generate_random_puzzle(size)
     print(solvable(root))  # kontrola do konzoly
     alg_buttons(root, size, c)
@@ -83,11 +111,11 @@ def greedy(event):
     global size
     global c
     global top
-    #root = [1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] #test
+    # root = [13, 8, 9, 4, 7, 2, 15, 6, 14, 1, 11, 10, 3, 0, 5, 12] #test
     # vypis do konzoly
     print(root)
     print(size)
-    c.create_text(150, 75, text="SOLVING BY GREEDY", font=tkinter.font.Font(size=12, family='Helvetica'))
+    c.create_text(150, 550, text="SOLVING BY GREEDY", font=tkinter.font.Font(size=12, family='Helvetica'))
     time3 = time()
     Greedy_solution = Greedy(root, size)
     Greedy_time = time() - time3
@@ -100,6 +128,7 @@ def greedy(event):
     c.create_text(145, 100, text=Greedy_solution[1], font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(40, 75, text="Time: ", font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(150, 75, text=Greedy_time, font=tkinter.font.Font(size=12, family='Helvetica'))
+    c.create_text(350, 550, text="SOLVED BY GREEDY", font=tkinter.font.Font(size=12, family='Helvetica'))
 
 def dfs_event(event):
 
@@ -107,7 +136,7 @@ def dfs_event(event):
     global size
     global c
     global top
-    c.create_text(150, 550, text="SOLVING BY DFS", font=tkinter.font.Font(size=12, family='Helvetica')) #nefunguje neviem preco chcel som vypisat ze ked stlacis tak aby pisalo ze riesi
+    #c.create_text(150, 550, text="SOLVING BY DFS", font=tkinter.font.Font(size=12, family='Helvetica')) #nefunguje neviem preco chcel som vypisat ze ked stlacis tak aby pisalo ze riesi
     print(root)
     print(size)
     time2 = time()
@@ -117,7 +146,12 @@ def dfs_event(event):
     print('DFS Solution is ', DFS_solution[0])
     print('Number of explored nodes is ', DFS_solution[1])
     print('DFS Time:', DFS_time, "\n")
-    move_button(root, DFS_solution[0], c, top)
+    if (DFS_solution[2] == 0):
+        move_button(root, DFS_solution[0], c, top)
+        c.create_text(350, 600, text="BY DFS", font=tkinter.font.Font(size=12, family='Helvetica'))
+    else:
+        print_field(top, c, root, size)
+        c.create_text(350, 550, text="NO SOLVED BY DFS", font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(72, 100, text="Node explored: ", font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(145, 100, text=DFS_solution[1], font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(40, 75, text="Time: ", font=tkinter.font.Font(size=12, family='Helvetica'))
@@ -145,6 +179,7 @@ def Astar_event(event):
     c.create_text(145, 100, text=AStar_solution[1], font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(40, 75, text="Time: ", font=tkinter.font.Font(size=12, family='Helvetica'))
     c.create_text(150, 75, text=AStar_time, font=tkinter.font.Font(size=12, family='Helvetica'))
+    c.create_text(350, 550, text="SOLVED BY A*", font=tkinter.font.Font(size=12, family='Helvetica'))
 
 def alg_buttons(root,size,c):
 
@@ -239,7 +274,6 @@ def move_button(root,solution,c, top):
     # button_back.place(anchor="center", height=50, width=50, x=150, y=550)
 
     c.delete(text_solve)
-    c.create_text(350, 550, text="SOLVED", font=tkinter.font.Font(size=12, family='Helvetica'))
 def matrix_to_array(matrix,size):
     array = []
     for i in range(0,size):
