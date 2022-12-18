@@ -25,6 +25,9 @@ def print_field(top, c, field,size):
         for j in range(0,size):
             c.create_rectangle(Start_index+X_index, Start_index+Y_index, End_index+X_index, End_index+Y_index,outline="black", fill="white", width=2)
             c.create_text(center_Value+X_index, center_Value+Y_index, text=field[n], font=tkinter.font.Font(size=25,family='Helvetica'))
+            if field[n] == 0:
+                c.create_rectangle(Start_index + X_index, Start_index + Y_index, End_index + X_index,
+                                   End_index + Y_index, outline="black", fill="gray", width=2)
             n = n + 1
             X_index+=100
         X_index = 0;
@@ -75,24 +78,26 @@ def field_4(event):
     global size
     size = 4
     root = generate_random_puzzle(size)
-    print(solvable(root)) #kontrola do konzoly
+    #root = [1, 2, 3, 7, 4, 5, 6, 11, 8, 9, 10, 15, 12, 13, 14, 0]  # test
+    print(if_solvable(root, size)) #kontrola do konzoly
     # while solvable(root) == False:
     #     root = generate_random_puzzle(size)
     while if_solvable(root, size) == False:
         root = generate_random_puzzle(size)
-    print(solvable(root))  #kontrola do konzoly
+    print(if_solvable(root, size))  #kontrola do konzoly
     alg_buttons(root, size, c)
 def field_3(event):
     global root
     global size
     size = 3
     root = generate_random_puzzle(size)
-    print(solvable(root)) # kontrola do konzoly
+    #root = [1, 0, 2, 7, 5, 4, 8, 6, 3]
+    print(if_solvable(root, size)) # kontrola do konzoly
     # while solvable(root) == False:
     #     root = generate_random_puzzle(size)
     while if_solvable(root, size) == False:
         root = generate_random_puzzle(size)
-    print(solvable(root))  # kontrola do konzoly
+    print(if_solvable(root, size))  # kontrola do konzoly
     alg_buttons(root, size, c)
 
 def gen_buttons(c, top, root, size):
@@ -148,7 +153,7 @@ def dfs_event(event):
     print('DFS Time:', DFS_time, "\n")
     if (DFS_solution[2] == 0):
         move_button(root, DFS_solution[0], c, top)
-        c.create_text(350, 600, text="BY DFS", font=tkinter.font.Font(size=12, family='Helvetica'))
+        c.create_text(350, 550, text="SOLVED BY DFS", font=tkinter.font.Font(size=12, family='Helvetica'))
     else:
         print_field(top, c, root, size)
         c.create_text(350, 550, text="NO SOLVED BY DFS", font=tkinter.font.Font(size=12, family='Helvetica'))
@@ -165,6 +170,8 @@ def Astar_event(event):
     # test
     #root = [1, 2, 3, 4, 5, 6, 7, 0, 8]
     # size = 3
+
+    # root = [1, 2, 3, 7, 4, 5, 6, 11, 8, 9, 10, 15, 12, 13, 14, 0] #test
 
     print(root)
     print(size)

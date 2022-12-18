@@ -7,9 +7,9 @@ from queue import LifoQueue
 #Depth-first Search with limited depth
 def DFS(given_state, n):
 
-    root2 = State(given_state, None, None, 0, 0)
-
     State.change_attribute(n)
+
+    root2 = State(given_state, None, None, 0, 0)
 
     if root2.test():
         return root2.solution()
@@ -39,9 +39,8 @@ def Greedy(given_state , n):
     frontier = PriorityQueue()
     explored = []
     counter = 0
-    root2 = State(given_state, None, None, 0, 0)
-
     State.change_attribute(n)
+    root2 = State(given_state, None, None, 0, 0)
 
     #root.evaluation()
     evaluation = root2.Manhattan_Distance(n) #we can use Misplaced_Tiles() instead.
@@ -68,9 +67,10 @@ def AStar_search(given_state , n):
     frontier = PriorityQueue()
     explored = []
     counter = 0
-    root2 = State(given_state, None, None, 0, 0)
 
     State.change_attribute(n)
+
+    root2 = State(given_state, None, None, 0, 0)
 
     evaluation = root2.Manhattan_Distance(n) #we can use Misplaced_Tiles() instead.
     frontier.put((evaluation[1], counter, root2)) #based on A* evaluation
