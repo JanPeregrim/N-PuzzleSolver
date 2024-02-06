@@ -1,8 +1,7 @@
 # N-Puzzle Solver
 The N-Puzzle Solver is a Python application that provides a graphical interface for solving the N-Puzzle problem using various search algorithms. The N-Puzzle problem, also known as the 15-Puzzle or 8-Puzzle, is a classic problem in artificial intelligence and computer science, where the goal is to rearrange a scrambled puzzle to its goal state by sliding tiles into the empty space.
 
-# N-Puzzle Solver
-- [ ](https://git.kpi.fei.tuke.sk/jp582qe/lloyd-puzzle/-/blob/main/puzzle.gif)
+![puzzle](/uploads/ee66df6b5225575d04d05c4b4ffcb7c2/puzzle.gif)
 
 ## Features
 - Graphical User Interface (GUI): The GUI allows users to interact with the solver visually, generating random puzzles and solving them using different algorithms.
@@ -14,7 +13,7 @@ Greedy search
 A* search
 - Solution Path Visualization: Once a puzzle is solved, the solution path is displayed in the GUI, showing the sequence of moves required to reach the goal state.
 
--Performance Metrics: The solver provides performance metrics such as the number of explored nodes and execution time for each algorithm, giving insights into their efficiency.
+- Performance Metrics: The solver provides performance metrics such as the number of explored nodes and execution time for each algorithm, giving insights into their efficiency.
 
 ## Files
 - Gui.py: Contains the implementation of the graphical user interface using the Tkinter library.
