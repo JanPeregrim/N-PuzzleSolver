@@ -6,11 +6,8 @@ The N-Puzzle Solver is a Python application that provides a graphical interface 
 ## Features
 - Graphical User Interface (GUI): The GUI allows users to interact with the solver visually, generating random puzzles and solving them using different algorithms.
 
-- Multiple Search Algorithms: The solver supports several search algorithms for finding the solution to the N-Puzzle problem:
+- Multiple Search Algorithms: The solver supports several search algorithms for finding the solution to the N-Puzzle problem: Depth-First Search (DFS) with limited depth, Greedy search and A* search.
 
-Depth-First Search (DFS) with limited depth
-Greedy search
-A* search
 - Solution Path Visualization: Once a puzzle is solved, the solution path is displayed in the GUI, showing the sequence of moves required to reach the goal state.
 
 - Performance Metrics: The solver provides performance metrics such as the number of explored nodes and execution time for each algorithm, giving insights into their efficiency.
