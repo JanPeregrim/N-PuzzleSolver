@@ -2,7 +2,7 @@ from Search_Algorithms import DFS, Greedy, AStar_search
 
 import tkinter.font
 from tkinter import *
-from gui import print_field
+from Gui import print_field
 
 #initial state
 n = 4
