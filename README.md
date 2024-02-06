@@ -1,4 +1,4 @@
-![puzzle](https://github.com/JanPeregrim/N-PuzzleSolver/assets/130740859/66bf8d66-3ea8-4831-afd3-ce825c770dab)# N-Puzzle Solver
+# N-Puzzle Solver
 The N-Puzzle Solver is a Python application that provides a graphical interface for solving the N-Puzzle problem using various search algorithms. The N-Puzzle problem, also known as the 15-Puzzle or 8-Puzzle, is a classic problem in artificial intelligence and computer science, where the goal is to rearrange a scrambled puzzle to its goal state by sliding tiles into the empty space.
 
 ![puzzle](https://github.com/JanPeregrim/N-PuzzleSolver/assets/130740859/65fa511e-6ccf-4831-b66c-413ebf193e85)
